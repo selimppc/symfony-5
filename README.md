@@ -1,11 +1,13 @@
 ## Symfony-5
 
+
+#### Installation : 
+
+
 #### Run the system 
 
     $ symfony serve
-    
-#### TO stop the system
+     
+#### database migration
 
-   $ symfony server:stop 
-   
-####
+    $ php bin/console doctrine:migrations:execute --up 20200409053223

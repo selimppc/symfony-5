@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profit Calculator !{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <small><i>A moment is waiting to click:</i></small>
+
+        {% if profit %}
+            <h2>
+                Profit  =  {{ profit }}
+            </h2>
+
+        {% endif %}
+
+        <p>
+            <a href="{{ url('get_profit') }}">
+                <button type="button" class="btn btn-success">Success</button>
+            </a>
+
+        </p>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

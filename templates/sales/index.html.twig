@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sales index{% endblock %}
+
+{% block body %}
+    <h1>Sales index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Order_qty</th>
+                <th>Batch_sequence</th>
+                <th>Cost_price</th>
+                <th>Sell_price</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sale in sales %}
+            <tr>
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.orderQty }}</td>
+                <td>{{ sale.batchSequence }}</td>
+                <td>{{ sale.costPrice }}</td>
+                <td>{{ sale.sellPrice }}</td>
+                <td>{{ sale.date ? sale.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sales_new') }}" class="btn btn-info" >Create new</a>
+{% endblock %}
