@@ -1,13 +1,18 @@
 ## Symfony-5
 
 
-#### Installation : 
+#### Composer Install : 
 
+    $ composer install
+
+#### database migration
+
+    $ php bin/console doctrine:migrations:execute --up 20200409053223
 
 #### Run the system 
 
     $ symfony serve
      
-#### database migration
+#### Run the functional Test
 
-    $ php bin/console doctrine:migrations:execute --up 20200409053223
+    $ ./bin/phpunit
