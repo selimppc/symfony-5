@@ -6,6 +6,7 @@
     $ composer install
 
 #### database migration
+    MYSQL  configuration is in .env file
 
     $ php bin/console doctrine:migrations:execute --up 20200409053223
 
