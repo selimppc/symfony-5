@@ -51,6 +51,11 @@ class SalesRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function profitAnalyze(){
         return $this->createQueryBuilder('s')
             ->select('SUM(s.order_qty * (s.sell_price - s.cost_price)) as profit')
