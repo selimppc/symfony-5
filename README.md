@@ -1,6 +1,12 @@
 ## Symfony-5
 
+#### install Symfony CLI.
+###### This will help to use command like : symfony
 
+    $ curl -sS https://get.symfony.com/cli/installer | bash
+    
+
+### To Run the project we need to run following commands: 
 #### Composer Install : 
 
     $ composer install
