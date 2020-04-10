@@ -39,15 +39,14 @@ class SalesRepository extends ServiceEntityRepository
 
     /**
      * @return mixed
-     * @throws NoResultException
-     * @throws NonUniqueResultException
      */
     public function getSoldItem()
     {
         return $this->createQueryBuilder('s')
-            ->select('SUM(s.order_qty) as qty')
+            ->select('SUM(s.order_qty) as order_qty, s.batch_sequence')
+            ->groupBy('s.batch_sequence')
             ->getQuery()
-            ->getSingleScalarResult()
+            ->getResult()
             ;
     }
 

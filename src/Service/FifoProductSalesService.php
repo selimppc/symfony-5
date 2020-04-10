@@ -9,7 +9,7 @@ use App\Repository\SalesRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 
-class FifoProductSales
+class FifoProductSalesService
 {
 
     /**
@@ -42,51 +42,53 @@ class FifoProductSales
     public function getFifoItem($sales)
     {
         $orderQty = $sales['order_qty'];
-        $totalSold = $this->salesRepository->getSoldItem();
+        $soldItems = $this->salesRepository->getSoldItem();
+        $soldArray = $this->prepareArrayOfSoldItem($soldItems);
+
         $products = $this->productRepository->getProducts();
 
         $orderArray = array();
         foreach ($products as $product){
-
             $itemId = $product->getId();
             $productQty = $product->getQuantity();
             $productSequent = $product->getBatchSequence();
             $productCost = $product->getCostPrice();
-            if ($productQty > $totalSold) {
-                $qty = $this->getOrderQty($orderQty, $productQty, $totalSold);
-                if ($qty){
-                    $orderArray[$productSequent] = array(
-                        'item_id' => $itemId,
-                        'order_qty' => $qty,
-                        'batch_sequence' => $productSequent,
-                        'cost_price' => $productCost,
-                    );
-                    $orderQty = $orderQty - $qty;
+
+            # get the sold quantity for this product
+            $soldQty = isset($soldArray[$productSequent])?$soldArray[$productSequent]:0;
+            # check available quantity
+            $availableProduct = $productQty - $soldQty;
+
+            if ($availableProduct > 0){
+                if ($availableProduct >= $orderQty){
+                    $qty = $orderQty;
+                }else{
+                    $qty = $availableProduct;
                 }
-            }elseif ($productQty < $totalSold){
-                $reduceSoldQty = $totalSold - $productQty;
-                $totalSold = $reduceSoldQty;
+                $orderArray[$productSequent] = array(
+                    'item_id' => $itemId,
+                    'order_qty' => $qty,
+                    'batch_sequence' => $productSequent,
+                    'cost_price' => $productCost,
+                );
+                $orderQty = $orderQty - $qty;
             }
+            if ($orderQty == 0) return $orderArray;
         }
         return $orderArray;
     }
 
+
     /**
-     * @param $orderQty
-     * @param $productQty
-     * @param $totalSold
-     * @return null
+     * @param $soldItems
+     * @return array
      */
-    protected function getOrderQty($orderQty, $productQty, $totalSold){
-        $val = null;
-        $diff = $productQty - $totalSold;
-        if ($diff >= $orderQty){
-            $val = $orderQty;
+    protected function prepareArrayOfSoldItem($soldItems){
+        $arr = array();
+        foreach ($soldItems as $item){
+            $arr[$item['batch_sequence']] = $item['order_qty'];
         }
-        if ($diff < $orderQty){
-            $val = $productQty - $totalSold;
-        }
-        return $val;
+        return $arr;
     }
 
 

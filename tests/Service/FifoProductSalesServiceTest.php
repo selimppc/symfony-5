@@ -4,7 +4,7 @@ namespace App\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class FifoProductSalesService extends WebTestCase
+class FifoProductSalesServiceTest extends WebTestCase
 {
     public function testSomething()
     {
@@ -14,7 +14,7 @@ class FifoProductSalesService extends WebTestCase
         // gets the special container that allows fetching private services
         $container = self::$container;
 
-        $service = $container->get('App\Service\FifoProductSales');
+        $service = $container->get('App\Service\FifoProductSalesService');
         $sampleArray = array(
             "order_qty" => "6",
             "sell_price" => "6"

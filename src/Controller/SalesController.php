@@ -7,7 +7,7 @@ use App\Entity\Sales;
 use App\Form\SalesType;
 use App\Repository\ProductRepository;
 use App\Repository\SalesRepository;
-use App\Service\FifoProductSales;
+use App\Service\FifoProductSalesService;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,12 +35,12 @@ class SalesController extends AbstractController
     /**
      * @Route("/new", name="sales_new", methods={"GET","POST"})
      * @param Request $request
-     * @param FifoProductSales $fifoProductSales
+     * @param FifoProductSalesService $fifoProductSalesService
      * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function new(Request $request, FifoProductSales $fifoProductSales): Response
+    public function new(Request $request, FifoProductSalesService $fifoProductSalesService): Response
     {
         $sale = new Sales();
         $form = $this->createForm(SalesType::class, $sale);
@@ -48,7 +48,8 @@ class SalesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $postSales = $request->request->get('sales');
-            $productsAsFifo = $fifoProductSales->getFifoItem($postSales);
+            $productsAsFifo = $fifoProductSalesService->getFifoItem($postSales);
+
             foreach ($productsAsFifo as $item){
                 $sale = new Sales();
                 $sale->setItemId($this->getDoctrine()->getRepository(Product::class)->find($item['item_id']));
