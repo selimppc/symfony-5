@@ -46,7 +46,11 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $product->setName('Gnomes');
-            $product->setBatchSequence($productRepository->findLastSequentNumber() +1);
+            # get last and  set sequence number
+            $sequenceNumber = $productRepository->findLastSequentNumber();
+            if ($sequenceNumber == null )
+                $sequenceNumber['batch_sequence'] = 0;
+            $product->setBatchSequence($sequenceNumber['batch_sequence'] + 1);
             $entityManager->persist($product);
             $entityManager->flush();
 

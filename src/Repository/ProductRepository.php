@@ -30,10 +30,10 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p.batch_sequence')
-            ->orderBy('p.p', 'DESC')
+            ->orderBy('p.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getOneOrNullResult();
     }
 
     /**
