@@ -3,7 +3,10 @@
 
 namespace App\Service;
 
-
+/**
+ * Class AbstractService
+ * @package App\Service
+ */
 abstract class AbstractService
 {
 
