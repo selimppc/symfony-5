@@ -6,10 +6,8 @@ namespace App\Service;
 
 use App\Repository\ProductRepository;
 use App\Repository\SalesRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 
-class FifoProductSalesService
+class FifoProductSalesService extends AbstractService
 {
 
     /**
@@ -36,8 +34,6 @@ class FifoProductSalesService
     /**
      * @param $sales
      * @return array
-     * @throws NoResultException
-     * @throws NonUniqueResultException
      */
     public function getFifoItem($sales)
     {
