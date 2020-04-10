@@ -23,21 +23,6 @@ class SalesRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $value
-     * @return mixed
-     */
-    public function getProductByPrevSales($value){
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
      * @return mixed
      */
     public function getSoldItem()

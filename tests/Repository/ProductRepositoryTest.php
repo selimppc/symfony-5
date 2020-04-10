@@ -27,14 +27,6 @@ class ProductRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testGetId()
-    {
-        $product = $this->entityManager
-            ->getRepository(Product::class)
-            ->find(1)
-        ;
-        $this->assertGreaterThanOrEqual(array(),$product);
-    }
 
     public function testGetByName(){
 

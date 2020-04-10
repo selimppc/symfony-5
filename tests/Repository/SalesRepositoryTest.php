@@ -26,15 +26,6 @@ class SalesRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testGetId()
-    {
-        $sales = $this->entityManager
-            ->getRepository(Sales::class)
-            ->findAll()
-        ;
-        $this->assertGreaterThanOrEqual(array(),$sales);
-    }
-
     public function testGetByName(){
         $sales = new Sales();
         $sales->setBatchSequence(1);
