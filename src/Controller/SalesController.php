@@ -5,11 +5,8 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Entity\Sales;
 use App\Form\SalesType;
-use App\Repository\ProductRepository;
 use App\Repository\SalesRepository;
 use App\Service\FifoProductSalesService;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,8 +34,6 @@ class SalesController extends AbstractController
      * @param Request $request
      * @param FifoProductSalesService $fifoProductSalesService
      * @return Response
-     * @throws NoResultException
-     * @throws NonUniqueResultException
      */
     public function new(Request $request, FifoProductSalesService $fifoProductSalesService): Response
     {

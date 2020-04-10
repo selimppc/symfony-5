@@ -7,6 +7,10 @@ namespace App\Service;
 use App\Repository\ProductRepository;
 use App\Repository\SalesRepository;
 
+/**
+ * Class FifoProductSalesService
+ * @package App\Service
+ */
 class FifoProductSalesService extends AbstractService
 {
 

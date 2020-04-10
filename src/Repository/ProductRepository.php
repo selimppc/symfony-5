@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,7 +22,6 @@ class ProductRepository extends ServiceEntityRepository
 
     /**
      * @return mixed
-     * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function findLastSequentNumber()
